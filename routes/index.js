@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Entertainment-Finder' });
 });
 
-router.get('/businesses', function(req, res, next) {
+router.post('/businesses', function(req, res, next) {
 
   var term = req.query.term;
   var location = req.query.loc;

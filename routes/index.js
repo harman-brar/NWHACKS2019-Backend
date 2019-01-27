@@ -9,7 +9,7 @@ const client = yelp.client(apiKey);
 
 const entCriteria = 'active,arts,beautysvc,eventservices,hotelstravel,localflavor,localservices,nightlife,shopping';
 
-const itemLimit = 15;
+var itemLimit = 15;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -20,6 +20,10 @@ router.get('/businesses', function(req, res, next) {
 
   var term = req.query.term;
   var location = req.query.loc;
+
+  if (req.query.limit != null) {
+    itemLimit = req.query.limit;
+  }
 
   var categories = null;
 
@@ -34,9 +38,10 @@ router.get('/businesses', function(req, res, next) {
   const searchRequest = {
     term: term,
     location: location,
+    radius: 10000,
     categories: categories,
     limit: itemLimit,
-    open_now: true
+    open_now: true,
   };
 
   client.search(searchRequest).then(response => {

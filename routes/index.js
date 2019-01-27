@@ -41,9 +41,7 @@ router.get('/businesses', function(req, res, next) {
 
   client.search(searchRequest).then(response => {
     const allItems = response.jsonBody.businesses;
-    //const prettyJson = JSON.stringify(allItems, null, 4);
     res.json(allItems);
-    //console.log(allItems);
   }).catch(e => {
     console.log(e);
   });
